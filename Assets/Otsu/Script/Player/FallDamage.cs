@@ -41,7 +41,7 @@ public class FallDamage : MonoBehaviour
         {
             //  落下地点と現在地の距離を計算
             fallFloorPosition = Mathf.Max(fallFloorPosition, transform.position.y);
-            Debug.Log(fallFloorPosition);
+            //Debug.Log(fallFloorPosition);
 
             //床にRayが当たったら
             if (Physics.Linecast(rayPosition.position, rayPosition.position + Vector3.down * rayRange, LayerMask.GetMask("Floor")))
