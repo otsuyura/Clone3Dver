@@ -7,9 +7,11 @@ public class PlayerMove : MonoBehaviour
 
     Transform player;
     Rigidbody playerRb;
+    float jumpFloorPosition;    //  ジャンプした座標
+    float playerPosition;       //  プレイヤーのリアルタイムの座標
 
-    public float speed = 0.1f;
-    public float jump = 250;
+    public float speed = 0.1f;  //  プレイヤーの移動速度
+    public float jump = 250;    //  プレイヤーのジャンプパワー
 
     bool jumpFlg;
     bool aKeyPushFlg;           //  Aキーが押されてるかどうか
@@ -18,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     {
         player = this.gameObject.GetComponent<Transform>();
         playerRb = this.gameObject.GetComponent<Rigidbody>();
+
         jumpFlg = false;
         aKeyPushFlg = true;
     }
@@ -43,12 +46,13 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 player.Translate(Vector2.left * speed);
+                Debug.Log("左移動中");
             }
-
             //  右移動
-            if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 player.Translate(Vector2.right * speed);
+                Debug.Log("右移動中");
             }
         }
         //ジャンプしてるとき
@@ -76,9 +80,12 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
+        Debug.Log(jumpFlg + "ジャンプフラグ");
         //ジャンプ
         if (Input.GetKey(KeyCode.Space) && jumpFlg == false)
         {
+            //jumpFloorPosition = this.transform.position.y;
+
             if (Input.GetKey(KeyCode.A))
             {
                 Debug.Log("Aキー入力");
@@ -97,7 +104,12 @@ public class PlayerMove : MonoBehaviour
             {
                 playerRb.AddForce(Vector2.up * jump);
             }
+
+            //playerPosition = this.transform.position.y;
+
             jumpFlg = true;
+
+
         }
 
     }
