@@ -114,12 +114,24 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider floor)
+    void OnTriggerEnter(Collider col)
     {
-        if (floor.gameObject.tag == "Floor")
+        //着地したらジャンプできるようにする
+        if (col.gameObject.tag == "Floor")
         {
             playerRb.velocity = new Vector3(0, 0, 0);
             jumpFlg = false;
+        }
+
+        //クリア判定
+        if (col.gameObject.tag == "Clear")
+        {
+            //ここにクリア処理
+            Debug.Log("ここにクリア処理");
+
+            //  ToDo
+            //  クリアシーンをその場で出す
+
         }
     }
 
